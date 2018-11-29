@@ -10,9 +10,12 @@ import com.nitin.qa.sampleProject.modules.basic.Basicbase;
 public class MessageBase extends WebDriverUtilities  {
 	
 	
-	public void openMessageModule(){
+	public void openMessageModule() throws Exception{
+		
 		WebElement messagemodule = driver.findElement(By.xpath("//h3[contains(@class,'ui-accordion-header')]/a[contains(text(),'Messaging')]"));
 		messagemodule.click();
+		Thread.sleep(1500);
+	
 	}
 
 	public void sendSms() throws Exception {
@@ -32,13 +35,8 @@ public class MessageBase extends WebDriverUtilities  {
 		openMessageModule();
 		
 		Assert.assertTrue(driver.findElement(By.xpath("//li[contains(@class,'module-item-green ui-draggable')][text()='Send an SMS']")).isDisplayed());
-
-
 		dragAndDropBy(driver, driver.findElement(By.xpath("//li[contains(@class,'module-item-green ui-draggable')][text()='Send an SMS']")), 250 , 100);
-
-
 		List<WebElement> startNode = driver.findElements(By.xpath("//div[contains(@class,'start-module')]/div[contains(@class,'mod-south')]/div[contains(@class,'syn-node-active')]"));
-
 		List<WebElement> sendSmsNode = driver.findElements(By.xpath("//div[contains(@class,'syn-module syn-module-green')]/div[contains(@class,'mod-north')]/div[contains(@class,'syn-receptor')]"));
 
 		dragAndDrop(driver, startNode.get(1), sendSmsNode.get(0));
@@ -48,18 +46,10 @@ public class MessageBase extends WebDriverUtilities  {
 		Basicbase.openBasicModule();
 		
 		Basicbase.exitApp(150, 150);
-		Basicbase.exitApp(400, 350);
-		Basicbase.exitApp(400, 500);
-		
-		
-
+		Basicbase.exitApp(400, 390);
+		Basicbase.exitApp(400, 370);
 		List<WebElement> smsSent =driver.findElements(By.xpath("//div[contains(@class,'syn-module syn-module-green')]/div/div[3]/div/div[3]/div[contains(@class,'syn-node syn-node-attached-w ui-draggable syn-node-active')]"));
-		
-
-
-
 		List<WebElement> hangupNode = driver.findElements(By.xpath("//div[contains(@class,'syn-module-red')]/div[contains(@class,'mod-north')]/div"));
-
 		dragAndDrop(driver, smsSent.get(0), hangupNode.get(0));
 
 	}
